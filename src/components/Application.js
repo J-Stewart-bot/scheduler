@@ -22,7 +22,6 @@ export default function Application(props) {
       let days = all[0].data;
       let appointments = all[1].data;
       let interviewers = all[2].data;
-      console.log(all[1].data);
       setState(prev => ({ ...prev, days, appointments, interviewers}))
     });
   }, [])
@@ -37,23 +36,45 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    console.log(interview)
-    console.log("HERE", appointments)
-    console.log("MAYBE", appointment)
-    console.log("id", )
     return (axios.put(`/api/appointments/${id}`, appointment)
       .then(() => {
         setState((prev => ({ ...prev, appointments})));
       })
     )
-    // setState((prev => ({ ...prev, appointments})));
   }
 
-  function cancelInterview(id) {
-    
+  function editInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    return (axios.put(`/api/appointments/${id}`, appointment)
+      .then(() => {
+        setState((prev => ({ ...prev, appointments})));
+      })
+    )
   }
 
-  // console.log(helpers.default.getAppointmentsForDay(state, state.day))
+  function cancelInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    return (axios.delete(`/api/appointments/${id}`)
+      .then(() => {
+        setState((prev => ({ ...prev, appointments})));
+      })
+    )
+  }
+
   const appsForDay = helpers.default.getAppointmentsForDay(state, state.day);
   const apps = appsForDay.map((appointment) => {
     const intForDay = helpers.default.getInterviewersForDay(state, state.day);
@@ -65,6 +86,8 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
+        editInterview={editInterview}
         interviewers={intForDay}
       />
     );
