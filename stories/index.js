@@ -16,7 +16,7 @@ import Show from "components/Apointments/Show";
 import Confirm from "components/Apointments/Confirm";
 import Status from "components/Apointments/Status";
 import Error from "components/Apointments/Error";
-// import Form from "components/Apointments/Form";
+import Form from "components/Apointments/Form";
 
 
 storiesOf("Button", module)
@@ -147,7 +147,7 @@ storiesOf("DayList", module)
         .add("Confirm", () => <Confirm onCancel={action("onCancel")} onConfirm={action("onConfirm")}/>)
         .add("Status", () => <Status/>)
         .add("Error", () => <Error onClose={action("onClose")}/>)
-        // .add("Form", () => <Form/>)
+        .add("Form", () => <Form interviewers={interviewers} onCancel={action("onCancel")} onConfirm={action("onConfirm")}/>)
         .add("Appointment Empty", () => (
           <Fragment>
             <Appointment id={1} time="12pm" />
