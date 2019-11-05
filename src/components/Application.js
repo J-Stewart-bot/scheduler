@@ -1,7 +1,6 @@
 import DayList from "components/DayList";
 import "components/Application.scss";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Appointment from "components/Apointments";
 import * as helpers from "components/helpers/selectors"
 import useApplicationData from "hooks/useApplicationData"
