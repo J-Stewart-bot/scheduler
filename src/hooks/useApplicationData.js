@@ -59,6 +59,7 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    console.log(id)
     return (axios.put(`/api/appointments/${id}`, appointment)
       .then(() => {
         dispatch({ type: SET_INTERVIEW, appointments: appointments})
@@ -69,7 +70,7 @@ export default function useApplicationData() {
   function cancelInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
-      interview: { ...interview }
+      interview: null
     };
     const appointments = {
       ...state.appointments,
@@ -77,7 +78,7 @@ export default function useApplicationData() {
     };
     return (axios.delete(`/api/appointments/${id}`)
       .then(() => {
-        dispatch({ type: SET_INTERVIEW, appointments: null})
+        dispatch({ type: SET_INTERVIEW, appointments: appointments})
       })
     )
   }
