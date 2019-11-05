@@ -5,6 +5,7 @@ export default function useApplicationData() {
   const SET_DAY = "SET_DAY";
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
+  const SET_SPOTS = "SET_SPOTS";
 
   function reducer(state, action) {
     switch (action.type) {
@@ -21,6 +22,10 @@ export default function useApplicationData() {
           ...state, appointments: action.appointments
         }
       }
+      case SET_SPOTS:
+        return {
+          ...state, days: action.days
+        }
       default:
         throw new Error(
           `Tried to reduce with unsupported action type: ${action.type}`
@@ -59,10 +64,25 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    console.log(id)
-    return (axios.put(`/api/appointments/${id}`, appointment)
+    let theDay = state.days.find(function(element) {
+      if (element.name === state.day) {
+        return element;
+      }
+    })
+    let dayID = theDay.id - 1;
+    let daySpots = theDay.spots;
+    const day = {
+      ...state.days[dayID],
+      spots: daySpots - 1
+    }
+    const days = [
+      ...state.days
+    ]
+    days[dayID] = day
+    return (axios.delete(`/api/appointments/${id}`)
       .then(() => {
         dispatch({ type: SET_INTERVIEW, appointments: appointments})
+        dispatch({ type: SET_SPOTS, days: days})
       })
     )
   }
@@ -76,9 +96,25 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    let theDay = state.days.find(function(element) {
+      if (element.name === state.day) {
+        return element;
+      }
+    })
+    let dayID = theDay.id - 1;
+    let daySpots = theDay.spots;
+    const day = {
+      ...state.days[dayID],
+      spots: daySpots + 1
+    }
+    const days = [
+      ...state.days
+    ]
+    days[dayID] = day
     return (axios.delete(`/api/appointments/${id}`)
       .then(() => {
         dispatch({ type: SET_INTERVIEW, appointments: appointments})
+        dispatch({ type: SET_SPOTS, days: days})
       })
     )
   }

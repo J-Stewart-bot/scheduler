@@ -30,7 +30,7 @@ export default function Application(props) {
     }
   );
 
-  console.log(state)
+  console.log("state", state)
 
   return (
     <main className="layout">
