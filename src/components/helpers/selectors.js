@@ -1,4 +1,5 @@
 export default{
+  //Gets the scheduled interviews for a given day
   getAppointmentsForDay(state, name) {
     const theDays = [];
     const filteredDays = state.days.filter(day => {
@@ -12,7 +13,7 @@ export default{
   },
 
 
-
+  //Gets the interviewers scheduled to work for a given day
   getInterviewersForDay(state, name) {
     const theInterviewers = [];
     const filteredInterviews = state.days.filter(day => {
@@ -25,10 +26,7 @@ export default{
     return result;
   },
 
-
-
-
-  
+  //Gets an interview with a given interviewer
   getInterview(state, interview) {
     if (!interview) {
       return null;

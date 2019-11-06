@@ -41,6 +41,7 @@ export default function useApplicationData() {
 
   const setDay = day => dispatch({ type: SET_DAY, day: day})
     
+  //Makes axios requests to the database to set the application data
   useEffect(() => {
     Promise.all([
       Promise.resolve(axios.get("/api/days")),
@@ -54,7 +55,7 @@ export default function useApplicationData() {
     });
   }, [])
       
-    
+  //Used as part of the *save* function in index.js
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -87,6 +88,7 @@ export default function useApplicationData() {
     )
   }
     
+  //Used as part of the *deleteInterview* function in index.js
   function cancelInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],

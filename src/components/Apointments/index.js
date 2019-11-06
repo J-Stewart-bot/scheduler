@@ -25,6 +25,7 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  //Saves an interview, either updating or creating a new one, and updates the days spots
   function save(name, interviewer) {
     transition(SAVING);
     const interview = {
@@ -36,17 +37,7 @@ export default function Appointment(props) {
     .catch(error => transition(ERROR_SAVE, true));
   }
 
-  function edit(name, interviewer) {
-    transition(SAVING);
-    const interview = {
-      student: name,
-      interviewer
-    };
-    props.editInterview(props.id, interview)
-    .then(() => transition(SHOW))
-    .catch(error => transition(ERROR_SAVE, true));
-  }
-
+  //Deletes an interview and updates the days spots and the database
   function deleteInterview(name, interviewer) {
     transition(DELETING, true);
     const interview = {

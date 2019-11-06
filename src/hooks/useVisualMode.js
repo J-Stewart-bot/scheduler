@@ -4,6 +4,7 @@ export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
 
+  //allows for transitions between components
   function transition(newMode, replace = false) {
     setMode(newMode);
     if (replace) {
@@ -12,6 +13,8 @@ export default function useVisualMode(initial) {
       history.push(newMode)
     }
   }
+  
+  //A transition the moves the user to the last used component
   function back() {
     if(history.length <= 1) {
       setMode(history[0]);
