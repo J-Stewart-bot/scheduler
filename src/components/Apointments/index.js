@@ -32,9 +32,13 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    props.bookInterview(props.id, interview)
-    .then(() => transition(SHOW))
-    .catch(error => transition(ERROR_SAVE, true));
+    if (interview.student === null || interview.interviewer === null) {
+      transition(ERROR_SAVE, true);
+    } else {
+      props.bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(error => transition(ERROR_SAVE, true));
+    }
   }
 
   //Deletes an interview and updates the days spots and the database
@@ -56,8 +60,8 @@ export default function Appointment(props) {
       transition(CREATE);
     }} />}
     {mode === SAVING && <Status message={"Saving"}/>}
-    {mode === ERROR_SAVE && <Error message={"save"}/>}
-    {mode === ERROR_DELETE && <Error message={"cancel"}/>}
+    {mode === ERROR_SAVE && <Error onClose={() => {back()}} message={"save"}/>}
+    {mode === ERROR_DELETE && <Error onClose={() => {back()}} message={"cancel"}/>}
     {mode === DELETING && <Status message={"Deleting"}/>}
     {mode === CONFIRM && <Confirm onCancel={() => {back()}} onConfirm={deleteInterview}/>}
     {mode === SHOW && (
