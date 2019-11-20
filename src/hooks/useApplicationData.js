@@ -87,6 +87,22 @@ export default function useApplicationData() {
       })
     )
   }
+
+  function editInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    return (axios.put(`/api/appointments/${id}`, appointment)
+      .then(() => {
+        dispatch({ type: SET_INTERVIEW, appointments: appointments})
+      })
+    )
+  }
     
   //Used as part of the *deleteInterview* function in index.js
   function cancelInterview(id, interview) {
@@ -121,6 +137,6 @@ export default function useApplicationData() {
     )
   }
 
-  return { state, setDay, bookInterview, cancelInterview}
+  return { state, setDay, bookInterview, cancelInterview, editInterview}
 
 }
