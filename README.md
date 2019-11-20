@@ -28,6 +28,6 @@ A single page application called Interview Scheduler, built using React.  Allows
 
 ## Here Are Some Pictures
 
-![Image of full page](https://gyazo.com/4539ce1991d960ce8735fead5d551247)
-![Image of deleting an interview](https://gyazo.com/4dcd7ddcf89789b4279b4233f1e39596)
-![Image of an error](https://gyazo.com/abaf84b65290b4b2e2c210e7a860e9f8)
+![Image of full page](https://i.gyazo.com/4539ce1991d960ce8735fead5d551247.png)
+![Image of deleting an interview](https://i.gyazo.com/4dcd7ddcf89789b4279b4233f1e39596.png)
+![Image of an error](https://i.gyazo.com/abaf84b65290b4b2e2c210e7a860e9f8.png)
