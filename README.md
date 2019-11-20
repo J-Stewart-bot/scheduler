@@ -26,6 +26,4 @@ npm run storybook
 
 A single page application called Interview Scheduler, built using React.  Allows users to create, edit and delete interviews on a given day during the week.
 
-Known issue:
-  After editing an interview spots decreases.
-  
+Format: ![image of full page](https://gyazo.com/4539ce1991d960ce8735fead5d551247)
