@@ -80,7 +80,7 @@ export default function useApplicationData() {
       ...state.days
     ]
     days[dayID] = day
-    return (axios.delete(`/api/appointments/${id}`)
+    return (axios.put(`/api/appointments/${id}`, appointment)
       .then(() => {
         dispatch({ type: SET_INTERVIEW, appointments: appointments})
         dispatch({ type: SET_SPOTS, days: days})

@@ -32,7 +32,7 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    if (interview.student === null || interview.interviewer === null) {
+    if (false) {
       transition(ERROR_SAVE, true);
     } else {
       props.bookInterview(props.id, interview)
